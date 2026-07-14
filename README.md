@@ -1,282 +1,341 @@
-# Project Title
+# Brain Tumor MRI Classification Using Hybrid DenseNet121-ResNet50 Feature Fusion and Support Vector Machine
 
-Write the project title clearly and concisely.
-Example: Official PyTorch implementation of **"<Paper / Research Title>"**.
+Official implementation of the undergraduate thesis:
 
-📄 **Paper**: [<your paper link, example:](https://www.researchgate.net/)
+**Performance Analysis of Hybrid DenseNet121 and ResNet50 Feature Fusion with Support Vector Machine for Brain Tumor MRI Classification**
 
 ---
 
 ## 📋 Overview
 
-**Section Description** This section provides a concise overview of the project. What to Include:
-- Brief background information.
-- Research or project objectives.
-- Main dataset or data sources.
-- Methods, frameworks, or algorithms used.
-- Expected results or contributions.
+Brain tumor diagnosis using Magnetic Resonance Imaging (MRI) remains a challenging task due to variations in tumor shape, size, image quality, and the complexity of manual interpretation by radiologists. This research proposes a hybrid Deep Learning and Machine Learning framework for multiclass brain tumor classification using MRI images.
 
-### Key Features
+The proposed framework utilizes DenseNet121 and ResNet50 as deep feature extractors. The extracted features are combined through feature fusion, reduced using Principal Component Analysis (PCA), standardized using StandardScaler, and classified using Support Vector Machine (SVM) with an RBF kernel. To improve model interpretability, Grad-CAM is employed to visualize the regions that contribute to the prediction results.
 
-**Section Description** This section highlights the main functionalities, capabilities, or technical components of the project. The goal is to help readers quickly understand what the system can do and what makes it technically useful. What to include:
-- Main functionalities of the system.
-- Important technical features.
-- (optional if Big data) AI/ML capabilities.
-- (optional if any) Automation or integration features.
-- Performance-related features.
+The experiments were conducted on a public MRI dataset consisting of **7,023 images** across four brain tumor categories.
 
-For Example:
-- **Novel Task**: GFD requires recognizing both labeled and unlabeled known identities (IDs) while simultaneously discovering new, previously unseen IDs
-- **Dynamic Prefix Generation**: Instance-specific feature extractors using lightweight, layer-wise prefixes generated on-the-fly by a HyperNetwork
-- **State-of-the-art Performance**: Significantly outperforms existing GCD methods and ArcFace baseline on fine-grained face recognition tasks
-- **High Cardinality Support**: Handles hundreds or thousands of visually similar face IDs effectively
+---
+
+## ✨ Key Features
+
+- Hybrid Deep Learning and Machine Learning framework
+- Transfer Learning using DenseNet121 and ResNet50
+- Deep Feature Fusion through feature concatenation
+- Principal Component Analysis (PCA) for dimensionality reduction
+- StandardScaler for feature normalization
+- Support Vector Machine (SVM) with RBF Kernel
+- Explainable AI using Grad-CAM
+- Multiclass Brain Tumor Classification
+- Streamlit deployment (NeuroScan AI)
 
 ---
 
 ## 🎯 Key Contributions
 
-**Section Description** This section explains the main research, technical, or practical contributions of the project. This section focuses on:
-- Novelty,
-- Research contributions,
-- Methodological improvements,
-- Technical innovations,
-- Real-world impact.
-
-For example:
-1. **Generalized Face Discovery (GFD)**: A new task formulation that bridges face identification and clustering in open-world scenarios
-2. **Dynamic Prefix Mechanism**: HyperNetwork-based prefix generators that create instance-specific feature extractors without massive model capacity
-3. **Comprehensive Benchmarks**: Six GFD benchmark datasets (YTF-500/1000/2000, CASIA-500/1000/2000)
-4. **Strong Generalization**: Competitive performance on generic GCD benchmarks (CIFAR-100, ImageNet-100, CUB, etc.)
+- Proposed a hybrid CNN-SVM framework combining DenseNet121 and ResNet50 feature representations.
+- Implemented Deep Feature Fusion to integrate complementary features from two pretrained CNN architectures.
+- Applied Principal Component Analysis (PCA) to reduce feature dimensionality before classification.
+- Compared baseline CNN models and Hybrid CNN-SVM models under identical experimental settings.
+- Improved model interpretability using Grad-CAM visualization.
+- Developed a prototype web application (NeuroScan AI) for real-time brain tumor prediction.
 
 ---
 
-## Project Architecture / Research Workflow
+# 🏗 Project Architecture / Research Workflow
 
-**Section Description** This section explains the overall research pipeline or system workflow. What to include:
-- Research methodology flowcharts
-- Architecture diagram
-- System pipeline illustrations
-
-Can be include:
-- Input and output for each stage.
-- Tools, frameworks, or technologies used.
-- Data flow or system process
-
-For Example:
+## Proposed Model
 
 <p align="center">
-  <img src="examplearchitecture.png" alt="Architecture of Your Project">
+  <img src="Diagram-Proposed%20Model%20V4.jpg" alt="Proposed Hybrid CNN-SVM Framework" width="100%">
 </p>
+
+The proposed hybrid framework consists of the following stages:
+
+1. **Data Collection**
+   - Brain MRI dataset (7,023 images)
+   - Four classes: Glioma, Meningioma, Pituitary, and No Tumor
+
+2. **Data Preprocessing**
+   - Resize images to 224 × 224
+   - ImageNet preprocessing
+   - Normalization
+   - Data augmentation
+     - Rotation
+     - Zoom
+     - Width Shift
+     - Height Shift
+     - Brightness Adjustment
+     - Horizontal Flip
+
+3. **CNN Training**
+   - DenseNet121
+   - ResNet50
+   - Adam Optimizer
+   - Batch Size: 32
+   - Initial Training: 20 Epochs
+   - Fine-Tuning: 35 Epochs
+
+4. **Feature Extraction**
+   - Global Average Pooling (GAP)
+   - Deep Feature Extraction
+   - Feature Fusion (Concatenation)
+   - PCA Dimensionality Reduction
+
+5. **Classification**
+   - StandardScaler
+   - Support Vector Machine (RBF Kernel)
+
+6. **Prediction**
+   - Brain Tumor Classification
+   - Grad-CAM Visualization
 
 ---
 
-## 🚀 Installation
+## CRISP-DM Methodology
 
-**Section Description** Provide instructions for setting up the project environment.
+<p align="center">
+  <img src="Diagram-CRISP-DM.jpg" alt="CRISP-DM Methodology" width="100%">
+</p>
 
-For Example:
+This research follows the CRISP-DM (Cross Industry Standard Process for Data Mining) methodology consisting of six stages:
 
-### Requirements
+1. Business Understanding
+2. Data Understanding
+3. Data Preparation
+4. Modeling
+5. Evaluation
+6. Deployment
 
-- Python 3.8+
-- PyTorch 2.3.1+
-- CUDA 11.8+
-- APEX (for mixed precision training)
-- etc.
+The developed prototype was deployed as **NeuroScan AI**, a Streamlit-based application for real-time brain tumor classification and Grad-CAM visualization.
 
-### Setup
+---
 
-1. Clone the repository:
+# 🚀 Installation
+
+## Requirements
+
+- Python 3.11
+- TensorFlow 2.x
+- Scikit-learn
+- NumPy
+- OpenCV
+- Matplotlib
+- Pandas
+- Streamlit
+- ONNX Runtime
+
+## Clone Repository
+
 ```bash
-git clone <repository-url, for example: https://github.com/yourusername/yourprojectname.git>
-cd ProjectName
+git clone https://github.com/Evan-Julian/BrainTumorMRIClassification.git
+
+cd BrainTumorMRIClassification
 ```
 
-2. Create a conda environment:
-```bash
-conda create -n projectname python=3.8
-conda activate projectname
-```
+## Install Dependencies
 
-3. Install dependencies:
 ```bash
 pip install -r requirements.txt
 ```
 
 ---
 
-## 📊 Dataset Preparation
+# 📊 Dataset Preparation
 
-### Name of The Dataset
+## Brain Tumor MRI Dataset
 
-**Section Description** Provide information about the dataset used in the project. The dataset must be primary (data obtained for example (not limited to) from surveys, interviews, observations, experiments, sensors, web scrapping/crawling, API collection), not secondary or downloaded from other repository. 
-What to include:
-- Dataset name.
-- Dataset source.
-- Dataset link.
-- Total number of samples.
-- Data structure.
-- File format.
-- Example samples.
+The experiments were conducted using a merged public Brain MRI dataset consisting of **7,023 MRI images**.
 
-For example:
-We provide six benchmark datasets for evaluating the Generalized Face Discovery task:
+### Dataset Distribution
 
-| Dataset | Known IDs | Unknown IDs | Train Samples | Test Samples |
-|---------|-----------|-------------|---------------|--------------|
-| YTF-500 | 250 | 250 | 48,089 | 11,779 |
-| YTF-1000 | 500 | 500 | 96,002 | 23,523 |
-| YTF-2000 | 1,000 | 1,000 | 190,248 | 46,615 |
-| CASIA-500 | 250 | 250 | 46,991 | 11,999 |
-| CASIA-1000 | 500 | 500 | 89,508 | 22,867 |
-| CASIA-2000 | 1,000 | 1,000 | 184,432 | 47,114 |
+| Class | Images |
+|--------|-------:|
+| Glioma | 1,321 |
+| Meningioma | 1,339 |
+| Pituitary | 1,457 |
+| No Tumor | 1,595 |
+| **Total** | **7,023** |
 
-Or you can just give the link of the dataset if you already upload on the repository like Kaggle or Mendeley Dataset.
+### Dataset Sources
 
-### Download
+- Figshare Brain Tumor Dataset
+- SARTAJ Brain MRI Dataset
+- Br35H Brain MRI Dataset
 
-**The dataset can be obtained at the link**
- 
-**Download links:**
-**Datasets**: [Dataset link on repository or Drive]
+### Dataset Structure
 
-Explain the structue of the dataset, for example:
-
-Once downloaded, organize the data as follows:
-```
-YourProject/
-├── positive_review2000/
-│   ├── train/
-│   └── test/
-├── negative_review2000/
-│   ├── train/
-│   └── test/
-├── neutral_review1000/
-│   ├── train/
-│   └── test/
-
-```
----
-
-## 🏋️ Training
-
-**Section Description** For big data, explain how to train the model. What to include:
-- Training scripts.
-- Training parameters.
-- Hyperparameters.
-- Execution commands.
-- GPU/CPU requirements.
-
-Example Structure:
-```bash
-python train.py --config configs/train.yaml
+```text
+dataset/
+│
+├── glioma/
+├── meningioma/
+├── pituitary/
+└── notumor/
 ```
 
 ---
 
-## 📊 Results
+# 🏋 Training
 
-**Section Description** This section presents the final outcomes, outputs, or achievements of the project. The content of this section may vary depending on the project type.  The goal is to demonstrate what has been successfully developed, implemented, evaluated, or achieved.
-What to include:
-- Final project outcomes.
-- System implementation results.
-- Experimental or testing results.
-- Visualization results like evaluation graphs, screenshots of the system or dashboard.
-- Performance analysis.
-- User testing or usability results.
-- Comparison with baseline or previous systems or benchmark comparison.
-- Deployment results.
+## Data Preprocessing
 
-You can use table or visualization. 
+- Resize (224 × 224)
+- ImageNet Preprocessing
+- Normalization
+- Rotation
+- Zoom
+- Width Shift
+- Height Shift
+- Brightness Adjustment
+- Horizontal Flip
 
----
+## Training Configuration
 
-## 🏗️ Project Structure
+| Parameter | Value |
+|------------|--------|
+| Optimizer | Adam |
+| Loss Function | Categorical Crossentropy |
+| Batch Size | 32 |
+| Initial Training | 20 Epochs |
+| Fine-Tuning | 35 Epochs |
+| Image Size | 224 × 224 |
 
-**Section Description** Explain you project structure.
+### Callbacks
 
-For Example: 
-
-```
-FaceGCD/
-├── data_loader/              # Dataset loaders and augmentations
-│   ├── augmentations/        # Data augmentation strategies
-│   ├── youtube_faces_*.py    # YTF dataset loaders
-│   ├── casia_webface_*.py    # CASIA dataset loaders
-│   └── data_loaders.py       # Main data loading utilities
-├── model/                    # Model architectures
-│   ├── dino_vision_transformer.py  # DINO ViT backbone
-│   ├── prefix_generator.py   # HyperNetwork-based prefix generator
-│   ├── ViT_face.py           # Face-specific ViT components
-│   └── mobilenet.py          # Landmark CNN
-├── trainer/                  # Training utilities
-│   ├── trainer.py            # Main training loop
-│   └── faster_mix_k_means_pytorch.py  # Semi-supervised K-Means
-├── utils/                    # Utility functions
-│   ├── cluster_utils.py      # Clustering utilities
-│   ├── losses.py             # Loss functions
-│   └── dino_utils.py         # DINO-specific utilities
-├── shell/                    # Shell scripts for experiments
-├── train.py                  # Training script
-├── extract_features.py       # Feature extraction script
-├── SSK.py                    # Semi-supervised K-Means evaluation
-└── requirements.txt          # Python dependencies
-```
+- EarlyStopping
+- ReduceLROnPlateau
+- ModelCheckpoint
 
 ---
 
-## 📝 Citation
+# 📊 Results
 
-**Section Description** Use this section if the project is associated with a publication or research paper. What to include:
-- Citation format.
-- DOI.
-- BibTeX entry.
+The proposed framework was evaluated using **Accuracy, Precision, Recall, F1-score, Classification Report, Confusion Matrix, and Grad-CAM visualization**. Six different models were compared under identical experimental settings.
 
-For Example:
-If you find this work useful for your research, please cite:
+## Overall Model Performance
+
+| Model | Accuracy | Precision | Recall |
+|--------|---------:|----------:|-------:|
+| DenseNet121 | 94.89% | 0.94 | 0.94 |
+| Hybrid DenseNet121 + SVM | 98.32% | 0.98 | 0.98 |
+| Fusion Model | 99.08% | 0.99 | 0.99 |
+| Hybrid ResNet50 + SVM | 99.24% | 0.99 | 0.99 |
+| ResNet50 | 99.39% | 0.99 | 0.99 |
+| **Proposed Ensemble** | **99.62%** | **1.00** | **1.00** |
+
+The **Proposed Ensemble** achieved the best overall performance with an **Accuracy of 99.62%**, outperforming all baseline CNN models and hybrid CNN-SVM approaches. This demonstrates that combining DenseNet121 and ResNet50 through feature fusion and ensemble learning provides superior classification performance for multiclass brain tumor MRI images.
+
+---
+
+## Per-Class Classification Performance of the Proposed Ensemble
+
+| Class | Precision | Recall | F1-score |
+|--------|----------:|--------:|---------:|
+| Glioma | **1.0000** | **0.9900** | **0.9950** |
+| Meningioma | **0.9871** | **0.9967** | **0.9919** |
+| No Tumor | **0.9975** | **1.0000** | **0.9988** |
+| Pituitary | **1.0000** | **0.9967** | **0.9983** |
+
+The proposed ensemble model consistently achieved high classification performance across all four brain tumor categories. The **No Tumor** class obtained a perfect recall of **1.0000**, while the **Glioma** and **Pituitary** classes achieved perfect precision (**1.0000**). These results indicate excellent robustness and generalization capability for multiclass brain tumor classification.
+
+---
+
+## Evaluation Metrics
+
+The evaluation includes:
+
+- Overall Accuracy
+- Precision
+- Recall
+- F1-score
+- Classification Report
+- Confusion Matrix
+- Grad-CAM Visualization
+---
+
+# 📂 Project Structure
+
+```text
+BrainTumorMRIClassification/
+
+│
+├── dataset/
+│
+├── models/
+│   ├── DenseNet121/
+│   └── ResNet50/
+│
+├── notebooks/
+│
+├── feature_extraction/
+│
+├── svm/
+│
+├── gradcam/
+│
+├── app/
+│   └── streamlit_app.py
+│
+├── results/
+│   ├── confusion_matrix/
+│   ├── gradcam/
+│   ├── accuracy_curve/
+│   └── loss_curve/
+│
+├── requirements.txt
+│
+└── README.md
+```
+
+---
+
+# 📝 Citation
+
+If you use this work in your research, please cite:
 
 ```bibtex
-@article{oh2025facegcd,
-  title={...},
-  authors={...},
-  journal={...},
-  year={...}
+@thesis{priyasa2026brain,
+  author = {Muhammad Evan Julian Priyasa},
+  title = {Performance Analysis of Hybrid DenseNet121 and ResNet50 Feature Fusion with Support Vector Machine for Brain Tumor MRI Classification},
+  school = {Universitas Multimedia Nusantara},
+  year = {2026}
 }
 ```
 
 ---
 
-## 🙏 Acknowledgments
+# 🙏 Acknowledgments
 
-**Section Description** Provide acknowledgements to contributors or supporting organizations. What to include:
-- (Mandatory) Big Data Lab, Information Systems Study Program, Universitas Multimedia Nusantara (UMN).
-- (if any) Sponsors/Partners.
-- (if any) Research groups.
-- (if any) Dataset providers.
-- (if any) Collaborators.
+This research was conducted under the supervision of the **Big Data Laboratory**, Information Systems Study Program, Universitas Multimedia Nusantara.
 
----
+Special thanks to:
 
-## 📧 Contact
-
-**Section Description** Provide maintainer or author contact information.
-
-For Example:
-For questions or issues, please:
-- Open an issue on GitHub
-- Contact: youremail@mail.com
+- Big Data Laboratory, Universitas Multimedia Nusantara
+- Information Systems Study Program, Universitas Multimedia Nusantara
+- Public Brain MRI Dataset Providers (Figshare, SARTAJ, and Br35H)
+- Thesis Supervisor
+- Universitas Multimedia Nusantara
 
 ---
 
-## 📜 License
+# 📧 Contact
 
-**Section Description** Please state your project license of any. For example:
+**Muhammad Evan Julian Priyasa**
 
-This project is released under the MIT License. See [LICENSE](LICENSE) file for details.
+Information Systems Undergraduate Student
+
+Universitas Multimedia Nusantara
+
+📧 Email: muhammad.evan@student.umn.ac.id
+
+🐙 GitHub: https://github.com/Evan-Julian
+
+💼 LinkedIn: https://www.linkedin.com/in/evanjulianp/
 
 ---
 
-## Tips
+# 📜 License
 
-You can just download this Read Me template and modify it. 
----
+This project is intended for **academic and research purposes only**.
+
+The developed model is designed as a **Computer-Aided Diagnosis (CAD) decision support system** and is **not intended to replace professional medical diagnosis or clinical decision-making**.
